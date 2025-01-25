@@ -12,21 +12,18 @@ console.log(`The navigator's name is ${hacker2}`);
 // Iteration 2: Conditionals
 
 // depending on the name's length
-// creating 2 variables that are the name's length
-let hacker1Length = hacker1.length;
-let hacker2Length = hacker2.length;
 // writing the conditional
-if (hacker1Length > hacker2Length) {
+if (hacker1.length > hacker2.length) {
   console.log(
-    `The driver has the longest name, it has ${hacker1Length} characters.`
+    `The driver has the longest name, it has ${hacker1.length} characters.`
   );
-} else if (hacker2Length > hacker1Length) {
+} else if (hacker2.length > hacker1.length) {
   console.log(
-    `It seems that the navigator has the longest name, it has ${hacker1Length} characters.`
+    `It seems that the navigator has the longest name, it has ${hacker1.length} characters.`
   );
 } else {
   console.log(
-    "Wow, you both have equally long names, ${hacker1Length} characters!"
+    `Wow, you both have equally long names, ${hacker1.length} characters!`
   );
 }
 
@@ -50,25 +47,26 @@ for (let i = hacker2Length - 1; i >= 0; i--) {
 console.log(reversedName);
 
 //depending on the lexicographic order of the strings
+let comparison = false;
 for (let i = 0; i < Math.min(hacker1.length, hacker2.length); i++) {
   if (hacker1[i] < hacker2[i]) {
     console.log("The driver's name goes first.");
+    comparison = true;
     break;
   } else if (hacker1[i] > hacker2[i]) {
-    console.log("Yo, the navigator goes first, definitely");
+    console.log("Yo, the navigator goes first, definitely.");
+    comparison = true;
     break;
   }
-  // when the strings are the same
-  if (hacker1Length < hacker2Length) {
+}
+if (!comparison && hacker1.length !== hacker2.length) {
+  if (hacker1.length < hacker2.length) {
     console.log("The driver's name goes first.");
-    break;
-  } else if (hacker1Length > hacker2Length) {
-    console.log("Yo, the navigator goes first, definitely");
-    break;
   } else {
-    console.log("What?! You both the same name?");
-    break;
+    console.log("Yo, the navigator goes first, definitely.");
   }
+} else if (!comparison) {
+  console.log("What?! You both have the same name?");
 }
 
 // Bonus 1
@@ -80,14 +78,8 @@ Sed pharetra lacus ut eros luctus vehicula. Fusce hendrerit nunc dolor, ullamcor
 Morbi semper tellus in luctus sodales.Morbi eu sem eu justo ornare auctor.Aenean maximus nunc in mollis laoreet.Proin eu dui euismod, scelerisque mi ut, convallis sapien.Phasellus a interdum sapien, at imperdiet velit.Vestibulum vel ornare mauris.Sed bibendum magna at felis tincidunt, convallis hendrerit lorem sagittis.Proin ac dapibus nisi.Phasellus rutrum blandit mattis.Ut dignissim diam sit amet velit auctor elementum.Sed viverra ultrices neque, id blandit augue venenatis et.`;
 
 // count the number of words in the string
-let countWords = 0;
-// split the string at any occurrence of one or more consecutive whitespace
-let words = longText.split(/\s+/);
-for (let i = 0; i < words.length; i++) {
-  if (words[i].trim() != "") countWords++;
-}
-
-console.log(countWords);
+let wordCount = longText.split(/\s+/).length;
+console.log(wordCount);
 
 // count the number of times the Latin word 'et' appears
 let etAppearence = 0;
@@ -102,24 +94,22 @@ console.log(etAppearence);
 
 // BONUS 2
 //creating a new variable
-let phraseToCheck = "A man, a plan, a canal, Panama!";
-// Lowercase the phrase and remove unwanted characters from it
-let cleanedPhrase = phraseToCheck.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
-// calculating the phrase length
-let phraseLength = cleanedPhrase.length;
+let phraseToCheck = "put it up";
 
-//As long as the characters from each part match
-// Both parth are strictly equal
-let check = true;
-for (let i = 0; i < phraseLength / 2; i++) {
-  // if characters dont match anymore
-  if (cleanedPhrase[i] !== cleanedPhrase[phraseLength - 1 - i]) {
-    check = false;
+let cleanedPhrase = "";
+for (let i = 0; i < phraseToCheck.length; i++) {
+  let char = phraseToCheck[i].toLowerCase();
+  if (char >= "a" && char <= "z") {
+    cleanedPhrase += char;
   }
 }
 
-if (check) {
-  console.log("It's Palindrome.");
-} else if (!check) {
-  console.log("It's not Palindrome.");
+let isPalindrome = true;
+for (let i = 0; i < cleanedPhrase.length / 2; i++) {
+  if (cleanedPhrase[i] !== cleanedPhrase[cleanedPhrase.length - 1 - i]) {
+    isPalindrome = false;
+    break;
+  }
 }
+
+console.log(`Is the phrase a palindrome? ${isPalindrome}`);
